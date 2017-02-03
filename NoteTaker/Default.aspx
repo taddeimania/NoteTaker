@@ -10,11 +10,36 @@
 <body>
     <div class="container">
         <h1>Take some notes.</h1>
+        <form runat="server" action="Add.aspx" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" name="title" placeholder="Title"/>
+            <input type="text" class="form-control" name="body" placeholder="Body"/>
+            <input type="text" class="form-control" name="timestamp" placeholder="Timestamp"/>
+        </div>
+        <input type="submit" class="btn btn-default" value="Add" />
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>TimeStamp</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% foreach (var note in Notes)
+                    { %>
+                <tr>
+                    <td><%= note.Title %></td>
+                    <td><a href="Edit.aspx?id=<%= note.Id %>"><%= note.Body %></a></td>
+                    <td><%= note.TimeStamp %></td>
+                    <td><%= note.Created %></td>
+                </tr>
+                <%} %>
+            </tbody>
+        </table>
     </div>
 
-    <% foreach (var note in Notes)
-       { %>
-    <%= note %>
-    <%} %>
 </body>
 </html>
